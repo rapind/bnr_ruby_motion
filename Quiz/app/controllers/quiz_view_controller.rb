@@ -10,7 +10,7 @@ class QuizViewController < UIViewController
   end
 
   def loadView
-    self.view = QuizView.alloc.init
+    self.view = UIView.alloc.init
   end
 
   def viewDidLoad
