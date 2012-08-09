@@ -1,0 +1,3 @@
+class QuizView < UIView
+  
+end
