@@ -44,20 +44,18 @@ class QuizViewController < UIViewController
     @answerLabel = subview(UILabel,
       left: 25, top: 300)
 
-    # Add our events
-    @showQuestionButton.addTarget(self, action: :showQuestion, forControlEvents: UIControlEventTouchUpInside)
-    @showAnswerButton.addTarget(self, action: :showAnswer, forControlEvents: UIControlEventTouchUpInside)
-  end
+    # Show question event
+    @showQuestionButton.when(UIControlEventTouchUpInside) do
+      @currentQuestionIndex += 1
+      @currentQuestionIndex = 0 if @currentQuestionIndex > (@questions.size - 1)
+      @questionLabel.text = @questions[@currentQuestionIndex]
+      @answerLabel.text = ''
+    end
 
-  def showQuestion
-    @currentQuestionIndex += 1
-    @currentQuestionIndex = 0 if @currentQuestionIndex > (@questions.size - 1)
-    @questionLabel.text = @questions[@currentQuestionIndex]
-    @answerLabel.text = ''
-  end
-
-  def showAnswer
-    @answerLabel.text = @answers[@currentQuestionIndex]
+    # Show answer event
+    @showAnswerButton.when(UIControlEventTouchUpInside) do
+      @answerLabel.text = @answers[@currentQuestionIndex]
+    end
   end
 
 end

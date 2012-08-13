@@ -2,5 +2,5 @@ source 'http://rubygems.org'
 
 gem 'rake'
 
-# gem 'bubble-wrap'
+gem 'bubble-wrap'
 gem 'teacup'
