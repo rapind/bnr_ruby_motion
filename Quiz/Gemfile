@@ -3,4 +3,4 @@ source 'http://rubygems.org'
 gem 'rake'
 
 # gem 'bubble-wrap'
-# gem 'simple-view', :git => 'https://github.com/seanho/SimpleView.git'
+gem 'teacup'

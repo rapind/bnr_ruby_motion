@@ -1,4 +1,20 @@
+Teacup::Stylesheet.new(:quiz_view) do
+
+  style UIButton,
+    width:  270,
+    height: 50
+
+  style UILabel,
+    width:  270,
+    height: 50,
+    textAlignment: UITextAlignmentCenter,
+    textColor:  UIColor.whiteColor,
+    backgroundColor: UIColor.clearColor
+
+end
+
 class QuizViewController < UIViewController
+  stylesheet :quiz_view
 
   attr_reader :questions, :answers, :currentQuestionIndex
 
@@ -13,32 +29,24 @@ class QuizViewController < UIViewController
     self.view = UIView.alloc.init
   end
 
-  def viewDidLoad
-    @showQuestionButton = UIButton.buttonWithType UIButtonTypeRoundedRect
-    @showQuestionButton.setTitle 'Show Question', forState: UIControlStateNormal
-    @showQuestionButton.frame = [[25, 50], [270, 50]]
+  layout do
+    @showQuestionButton = subview(UIButton.buttonWithType(UIButtonTypeRoundedRect), 
+      title:  "Show Question",
+      left: 25, top: 50)
+
+    @showAnswerButton = subview(UIButton.buttonWithType(UIButtonTypeRoundedRect),
+      title:  "Show Answer",
+      left: 25, top: 250)
+
+    @questionLabel = subview(UILabel,
+      left: 25, top: 100)
+
+    @answerLabel = subview(UILabel,
+      left: 25, top: 300)
+
+    # Add our events
     @showQuestionButton.addTarget(self, action: :showQuestion, forControlEvents: UIControlEventTouchUpInside)
-    view.addSubview(@showQuestionButton)
-
-    @questionLabel = UILabel.new
-    @questionLabel.textAlignment = UITextAlignmentCenter
-    @questionLabel.frame = [[25, 150], [270, 50]]
-    @questionLabel.textColor = UIColor.whiteColor
-    @questionLabel.backgroundColor = UIColor.clearColor
-    view.addSubview(@questionLabel)
-
-    @showAnswerButton = UIButton.buttonWithType UIButtonTypeRoundedRect
-    @showAnswerButton.setTitle 'Show Answer', forState: UIControlStateNormal
-    @showAnswerButton.frame = [[25, 250], [270, 50]]
     @showAnswerButton.addTarget(self, action: :showAnswer, forControlEvents: UIControlEventTouchUpInside)
-    view.addSubview(@showAnswerButton)
-
-    @answerLabel = UILabel.new
-    @answerLabel.textAlignment = UITextAlignmentCenter
-    @answerLabel.frame = [[25, 350], [270, 50]]
-    @answerLabel.textColor = UIColor.whiteColor
-    @answerLabel.backgroundColor = UIColor.clearColor
-    view.addSubview(@answerLabel)
   end
 
   def showQuestion
