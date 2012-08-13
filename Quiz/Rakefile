@@ -7,5 +7,5 @@ Bundler.require
 Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.
   app.name = 'Quiz'
-  app.icons += ['icon.png', 'icon@2x.png']
+  app.icons += ['icon.png', 'icon_retina.png']
 end
