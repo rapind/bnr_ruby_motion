@@ -4,7 +4,6 @@ class AppDelegate
     @window.rootViewController = WhereamiController.alloc.init
     @window.rootViewController.wantsFullScreenLayout = true
     @window.makeKeyAndVisible
-
     true
   end
 end
