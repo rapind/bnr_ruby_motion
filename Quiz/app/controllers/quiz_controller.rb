@@ -13,7 +13,7 @@ Teacup::Stylesheet.new(:quiz_view) do
 
 end
 
-class QuizViewController < UIViewController
+class QuizController < UIViewController
   stylesheet :quiz_view
 
   attr_reader :questions, :answers, :currentQuestionIndex
