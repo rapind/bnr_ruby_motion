@@ -12,10 +12,6 @@ class BNRMapPoint
     @coordinate
   end
 
-  def setCoordinate(coordinate)
-    @coordinate = coordinate
-  end
-
   def title
     @title
   end
