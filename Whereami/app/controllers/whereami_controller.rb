@@ -1,5 +1,4 @@
 class WhereamiController < UIViewController
-  stylesheet :whereami_view
 
   def init
     super
@@ -19,11 +18,11 @@ class WhereamiController < UIViewController
 
   layout do
     # Add the map.
-    @worldView = subview(MKMapView,
+    @map = subview(MKMapView,
       frame: UIScreen.mainScreen.bounds,
       mapType: 0,
       delegate: self)
-    @worldView.showsUserLocation = true
+    @map.showsUserLocation = true
 
     # Add the location title field.
     @locationTitleField = subview(UITextField, 
@@ -53,7 +52,7 @@ class WhereamiController < UIViewController
 
   # Target action for the map type selector.
   def selectMap(selector)
-    @worldView.mapType = selector.selectedSegmentIndex
+    @map.mapType = selector.selectedSegmentIndex
   end
 
   # Delegate method launched when the location title field changes.
@@ -90,17 +89,17 @@ class WhereamiController < UIViewController
 
   # We have a new location, so update the map.
   def foundLocation(loc)
-    coord = loc.coordinate
+    coordinate = loc.coordinate
     
     # Create an instance of MapPoint with the current data
-    mp = BNRMapPoint.new(coordinate: coord, title: @locationTitleField.text)
+    mapPoint = BNRMapPoint.new(coordinate: coordinate, title: @locationTitleField.text)
 
     # Add it to the map view 
-    @worldView.addAnnotation(mp)
+    @map.addAnnotation(mapPoint)
 
     # Zoom the region to this location
-    region = MKCoordinateRegionMakeWithDistance(coord, 250, 250);
-    @worldView.setRegion(region, animated: true)
+    region = MKCoordinateRegionMakeWithDistance(coordinate, 250, 250);
+    @map.setRegion(region, animated: true)
     
     @locationTitleField.text = ""
     @activityIndicator.stopAnimating
@@ -110,9 +109,8 @@ class WhereamiController < UIViewController
 
   # Delegate method for the map that's called whenever there's a location change.
   def mapView(mapView, didUpdateUserLocation: userLocation)
-    loc = userLocation.coordinate
-    region = MKCoordinateRegionMakeWithDistance(loc, 250, 250)
-    @worldView.setRegion(region, animated: true)
+    region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 250, 250)
+    @map.setRegion(region, animated: true)
   end
 
 end
