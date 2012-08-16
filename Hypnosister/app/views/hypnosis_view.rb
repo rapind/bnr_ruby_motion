@@ -1,10 +1,15 @@
 class HypnosisView < UIView
 
+  attr_reader :circleColor
+
   def initWithFrame(frame)
-    super
-    # All hypnosis views start with a clear background color.
-    self.backgroundColor = UIColor.clearColor
-    return self
+    if super
+      # All hypnosis views start with a clear background color.
+      self.backgroundColor = UIColor.clearColor
+      @circleColor = UIColor.lightGrayColor
+    end
+
+    self
   end
   
   def drawRect(dirtyRect)
@@ -20,7 +25,7 @@ class HypnosisView < UIView
     # The thickness of the line should be 10 points wide.
     CGContextSetLineWidth(ctx, 10)
 
-    UIColor.lightGrayColor.setStroke
+    @circleColor.setStroke
 
     maxRadius.step(0, -20).each do |radius|
       # Add a path to the context.
@@ -55,6 +60,23 @@ class HypnosisView < UIView
 
     # Draw the string.
     text.drawInRect(textRect, withFont:font)
+  end
+
+  def canBecomeFirstResponder
+    true
+  end
+
+  # Specify a custom writer to trigger the setNeedsDisplay event.
+  def circleColor=(circleColor)
+    @circleColor = circleColor
+    setNeedsDisplay
+  end
+
+  def motionBegan(motion, withEvent:event)
+    if motion == UIEventSubtypeMotionShake
+      p "Device started shaking!"
+      self.circleColor = UIColor.redColor
+    end
   end
 
 end
