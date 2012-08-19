@@ -1,12 +1,10 @@
 Teacup::Stylesheet.new(:quiz_view) do
 
   style UIButton,
-    width:  270,
-    height: 50
+    width:  270, height: 50
 
   style UILabel,
-    width:  270,
-    height: 50,
+    width:  270, height: 50,
     textAlignment: UITextAlignmentCenter,
     textColor:  UIColor.whiteColor,
     backgroundColor: UIColor.clearColor

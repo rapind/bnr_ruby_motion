@@ -1,0 +1,2 @@
+class HypnosisView < UIView
+end
