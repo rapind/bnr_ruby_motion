@@ -1,5 +1,7 @@
 class ItemsController < UITableViewController
 
+  NO_MORE = "No more items!"
+
   def init
     initWithStyle(nil)
   end
@@ -7,6 +9,7 @@ class ItemsController < UITableViewController
   def initWithStyle(style)
     # Always use a specific style, regardless of param passed.
     super(UITableViewStyleGrouped)
+    view.backgroundColor = UIColor.colorWithPatternImage(UIImage.imageNamed("nyan.png"))
 
     20.times do
       ItemStore.sharedStore.createItem
@@ -35,6 +38,19 @@ class ItemsController < UITableViewController
     end
   end
 
+  def tableView(tableView, heightForRowAtIndexPath:indexPath)
+    section = indexPath.section
+    row = indexPath.row
+
+    if section == 0
+      under = ItemStore.sharedStore.itemsUnder
+      row == under.size ? 44 : 60
+    elsif section == 1
+      over = ItemStore.sharedStore.itemsOver
+      p = row == over.size ? 44 : 60
+    end
+  end
+
   def tableView(tableView, cellForRowAtIndexPath:indexPath)
     # Check for a reusable cell first, and use that if it exists.
     cell = tableView.dequeueReusableCellWithIdentifier("UITableViewCell")
@@ -51,11 +67,13 @@ class ItemsController < UITableViewController
     p = nil
     if section == 0
       under = ItemStore.sharedStore.itemsUnder
-      p = row == under.size ? "No more items!" : under[row]
+      p = row == under.size ? NO_MORE : under[row]
     elsif section == 1
       over = ItemStore.sharedStore.itemsOver
-      p = row == over.size ? "No more items!" : over[row]
+      p = row == over.size ? NO_MORE : over[row]
     end
+
+    cell.textLabel.font = UIFont.boldSystemFontOfSize(20) unless p == NO_MORE
 
     cell.textLabel.setText(p.to_s)
 
