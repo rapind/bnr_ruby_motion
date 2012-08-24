@@ -40,10 +40,10 @@ class HeavyController < UIViewController
   stylesheet :heavy_view
 
   layout :root do
-    slider = subview(UISlider, :slider)
-    image = subview(UIImageView, :image)
-    leftButton = subview(UIButton.buttonWithType(UIButtonTypeRoundedRect), :left_button)
-    rightButton = subview(UIButton.buttonWithType(UIButtonTypeRoundedRect), :right_button)
+    subview(UISlider, :slider)
+    subview(UIImageView, :image)
+    subview(UIButton.buttonWithType(UIButtonTypeRoundedRect), :left_button)
+    subview(UIButton.buttonWithType(UIButtonTypeRoundedRect), :right_button)
   end
 
   def shouldAutorotateToInterfaceOrientation(toInterfaceRotation)

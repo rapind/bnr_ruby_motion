@@ -19,6 +19,8 @@ class HypnosisController < UIViewController
       left: 20, top: view.bounds.size.height - 160,
       width: 280, height: 44)
 
+    @selector.addTarget(UIControlEventTouchUpInside, action:"someMethod:")
+
     # Handle the selection event.
     @selector.when(UIControlEventValueChanged) do
       case @selector.selectedSegmentIndex
