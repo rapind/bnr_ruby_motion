@@ -24,4 +24,12 @@ class ItemStore
     item
   end
 
+  def itemsUnder
+    @items.dup.delete_if{|i| i.value > 50}
+  end
+
+  def itemsOver
+    @items.dup.delete_if{|i| i.value <= 50}
+  end
+
 end
