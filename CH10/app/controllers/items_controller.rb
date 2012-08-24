@@ -8,7 +8,7 @@ class ItemsController < UITableViewController
     # Always use a specific style, regardless of param passed.
     super(UITableViewStyleGrouped)
 
-    5.times do
+    15.times do
       ItemStore.sharedStore.createItem
     end
 
