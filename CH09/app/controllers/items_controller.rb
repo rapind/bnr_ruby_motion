@@ -9,8 +9,7 @@ class ItemsController < UITableViewController
   def initWithStyle(style)
     # Always use a specific style, regardless of param passed.
     super(UITableViewStyleGrouped)
-    view.backgroundColor = UIColor.colorWithPatternImage(UIImage.imageNamed("nyan.png"))
-
+    view.backgroundView = UIImageView.alloc.initWithImage(UIImage.imageNamed("nyan.png"))
     20.times do
       ItemStore.sharedStore.createItem
     end
